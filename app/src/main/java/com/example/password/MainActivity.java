@@ -3,7 +3,9 @@ package com.example.password;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +14,7 @@ import android.widget.EditText;
 public class MainActivity extends AppCompatActivity {
 
     private Context context = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,14 +30,18 @@ public class MainActivity extends AppCompatActivity {
                     showAlertDialog(getApplicationContext(), "Authentication Failed", "Wrong pin", "Retry", "Exit");
 
                 } else {
-                    showAlertDialog(getApplicationContext(), "Authentication Sucess", "Welcome", "Ok", "Exit");
+
+                    Intent i = new Intent(getApplicationContext(), Main2Activity.class);
+                    i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    startActivity(i);
+
                 }
             }
         });
     }
 
     public void showAlertDialog(final Context context1, String title, String message, String posBtnMsg, String negBtnMsg) {
-        final AlertDialog.Builder builder ;
+        final AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(context);
 
         builder.setMessage(message).setTitle(message);
@@ -59,6 +66,5 @@ public class MainActivity extends AppCompatActivity {
         alert.setTitle(title);
         alert.show();
     }
-
 
 }
